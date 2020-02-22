@@ -13,7 +13,7 @@ fi
 
 if [[ -z "$SKIP_LABELS" ]]; then
   echo "Setting the default SKIP_LABELS variable value."
-  SKIP_LABELS="approved,wip"
+  SKIP_LABELS="work-in-progress,wip"
 fi
 
 if [[ -z "$AFTER_DAYS" ]]; then
