@@ -1,4 +1,5 @@
-name: Add need review label to an open pull request after 4 days
+name: Add an attention label to an open pull request
+description: Add need-review attention label to an open pull request after 4 days
 on:
   schedule:
   - cron:  '0 0 * * 1-5'
