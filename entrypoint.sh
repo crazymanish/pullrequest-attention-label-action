@@ -23,14 +23,14 @@ fi
 
 URI="https://api.github.com"
 API_HEADER="Accept: application/vnd.github.v3+json"
-AUTH_HEADER="Authorization: token ${GITHUB_TOKEN}"
+AUTH_HEADER="Authorization: token $GITHUB_TOKEN"
 
 echo "Fetching, Open pull requests"
 OPEN_PULL_REQUESTS=$(
   curl -XGET -fsSL \
-    -H "${AUTH_HEADER}" \
-    -H "${API_HEADER}" \
-    "${URI}/repos/${GITHUB_REPOSITORY}/issues?state=open"
+    -H "$AUTH_HEADER" \
+    -H "$API_HEADER" \
+    "$URI/repos/$GITHUB_REPOSITORY/issues?state=open"
   )
 
 PULL_REQUESTS=$(echo "$OPEN_PULL_REQUESTS" | jq --raw-output '.[] | {number: .number, created_at: .created_at, labels: .labels} | @base64')
@@ -83,11 +83,11 @@ for PULL_REQUEST in $PULL_REQUESTS; do
   echo "Adding, Pull request review attention LABEL: $ADD_LABEL, pull request NUMBER: $PULL_REQUEST_NUMBER"
 
   curl -sSL \
-    -H "${AUTH_HEADER}" \
-    -H "${API_HEADER}" \
+    -H "$AUTH_HEADER" \
+    -H "$API_HEADER" \
     -X POST \
     -H "Content-Type: application/json" \
-    -d "{\"labels\":[\"${ADD_LABEL}\"]}" \
-    "${URI}/repos/${GITHUB_REPOSITORY}/issues/${PULL_REQUEST_NUMBER}/labels"
+    -d "{\"labels\":[\"$ADD_LABEL\"]}" \
+    "$URI/repos/$GITHUB_REPOSITORY/issues/$PULL_REQUEST_NUMBER/labels"
 
 done
