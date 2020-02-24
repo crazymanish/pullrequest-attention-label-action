@@ -1,0 +1,15 @@
+name: Add need review label to an open pull request after 4 days
+on:
+  schedule:
+  - cron:  '0 0 * * 1-5'
+jobs:
+  reviewNeedLabel:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Add need review
+      uses: crazymanish/pullrequest-attention-label-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        ADD_LABEL: "need-review"
+        AFTER_DAYS: 4
+        SKIP_LABELS: "approved,wip"
