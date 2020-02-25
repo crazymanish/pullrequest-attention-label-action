@@ -1,16 +1,14 @@
-name: Add an attention label to an open pull request
-description: Add need-review attention label to an open pull request after 4 days
-on:
-  schedule:
-  - cron:  '0 0 * * 1-5'
-jobs:
-  reviewNeedLabel:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Add need review
-      uses: crazymanish/pullrequest-attention-label-action@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        ADD_LABEL: "need-review"
-        AFTER_DAYS: 4
-        SKIP_LABELS: "approved,wip"
+name: 'Add an attention label to an open pull request'
+description: 'Add need-review attention label to an open pull request after 4 days'
+author: 'Manish Rathi'
+inputs:
+  GITHUB_TOKEN:
+    description: 'The GITHUB_TOKEN secret'
+  ADD_LABEL:
+    description: 'The attention label name to add'
+  AFTER_DAYS:
+    description: 'The number of days from pull request creation date.'
+    default: 3
+  SKIP_LABELS:
+    description: 'The comma separated labels string. If an open pull-request has one of those label then this action will skip adding the attention label.'
+    default: 'work-in-progress,wip'
