@@ -12,3 +12,6 @@ inputs:
   SKIP_LABELS:
     description: 'The comma separated labels string. If an open pull-request has one of those label then this action will skip adding the attention label.'
     default: 'work-in-progress,wip'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
