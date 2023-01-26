@@ -72,15 +72,12 @@ for PULL_REQUEST in $PULL_REQUESTS; do
     continue
   fi
 
-  if [[ $SKIP_DRAFTS -ne false ]]; then
+  if [[ $SKIP_DRAFTS != "false" ]]; then
     IS_A_DRAFT=$(echo "$PULL_REQUEST_INFO" | jq --raw-output '.draft')
     if [[ $IS_A_DRAFT ]]; then
-      echo "Ignoring, this pull request is a DRAFT"
+      echo "Ignoring, this pull request because it's a DRAFT"
       continue
     fi
-  else
-    echo "Proceeding without draft"
-    continue
   fi
 
   CREATED_AT=$(echo "$PULL_REQUEST_INFO" | jq --raw-output '.created_at')
