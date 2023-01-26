@@ -74,7 +74,7 @@ for PULL_REQUEST in $PULL_REQUESTS; do
 
   if [[ $SKIP_DRAFTS != "false" ]]; then
     IS_A_DRAFT=$(echo "$PULL_REQUEST_INFO" | jq --raw-output '.draft')
-    if [[ $IS_A_DRAFT ]]; then
+    if [[ $IS_A_DRAFT == "true" ]]; then
       echo "Ignoring, this pull request because it's a DRAFT"
       continue
     fi
