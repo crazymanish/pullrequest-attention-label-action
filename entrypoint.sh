@@ -17,8 +17,8 @@ if [[ -z "$SKIP_LABELS" ]]; then
 fi
 
 if [[ -z "$REMOVE_LABEL" ]]; then
-  echo "Set the REMOVE_LABEL env variable."
-  exit 1
+  echo "Setting the default REMOVE_LABEL variable value."
+  REMOVE_LABEL="untriaged"
 fi
 
 if [[ -z "$AFTER_DAYS" ]]; then
