@@ -21,6 +21,11 @@ if [[ -z "$AFTER_DAYS" ]]; then
   AFTER_DAYS=3
 fi
 
+if [[ -z "$SKIP_DRAFTS" ]]; then
+  echo "Setting the default SKIP_DRAFTS variable value."
+  SKIP_DRAFTS=false
+fi
+
 URI="https://api.github.com"
 API_HEADER="Accept: application/vnd.github.v3+json"
 AUTH_HEADER="Authorization: token $GITHUB_TOKEN"
@@ -33,7 +38,7 @@ OPEN_PULL_REQUESTS=$(
     "$URI/repos/$GITHUB_REPOSITORY/issues?state=open"
   )
 
-PULL_REQUESTS=$(echo "$OPEN_PULL_REQUESTS" | jq --raw-output '.[] | {number: .number, created_at: .created_at, labels: .labels} | @base64')
+PULL_REQUESTS=$(echo "$OPEN_PULL_REQUESTS" | jq --raw-output '.[] | {number: .number, created_at: .created_at, labels: .labels, draft: .draft} | @base64')
 
 for PULL_REQUEST in $PULL_REQUESTS; do
   PULL_REQUEST_INFO="$(echo "$PULL_REQUEST" | base64 -d)"
@@ -65,6 +70,14 @@ for PULL_REQUEST in $PULL_REQUESTS; do
 
   if [[ "$IS_SKIP_LABEL_NAME_EXIST" == "true" ]]; then
     continue
+  fi
+
+  if [[ $SKIP_DRAFTS != "false" ]]; then
+    IS_A_DRAFT=$(echo "$PULL_REQUEST_INFO" | jq --raw-output '.draft')
+    if [[ $IS_A_DRAFT == "true" ]]; then
+      echo "Ignoring, this pull request because it's a DRAFT"
+      continue
+    fi
   fi
 
   CREATED_AT=$(echo "$PULL_REQUEST_INFO" | jq --raw-output '.created_at')
