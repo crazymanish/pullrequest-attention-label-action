@@ -1,7 +1,7 @@
 FROM alpine:3.13.4
 
-LABEL "com.github.actions.name"="Add Label when a pull request require attention."
-LABEL "com.github.actions.description"="A GitHub action to add an attention label on an open pull-request after certain days."
+LABEL "com.github.actions.name"="Add Label when a pull request or issue require attention."
+LABEL "com.github.actions.description"="A GitHub action to add an attention label on an open pull-request or issue after certain days."
 LABEL "com.github.actions.icon"="tag"
 LABEL "com.github.actions.color"="blue"
 
