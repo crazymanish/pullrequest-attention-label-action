@@ -31,6 +31,7 @@ jobs:
         ADD_LABEL: "need-review"
         AFTER_DAYS: 4
         SKIP_LABELS: "approved,wip"
+        REMOVE_LABELS: "helpwanted,untriaged"
 ```
 
 #### GitHub action workflow execution
