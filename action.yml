@@ -12,6 +12,8 @@ inputs:
   SKIP_LABELS:
     description: 'The comma separated labels string. If an open pull-request has one of those label then this action will skip adding the attention label.'
     default: 'work-in-progress,wip'
+  REMOVE_LABEL:
+    description: 'Remove the previous dependent label'
 runs:
   using: 'docker'
   image: 'Dockerfile'
