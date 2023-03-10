@@ -187,7 +187,7 @@ for ISSUE in $ISSUES; do
   if [[ $(($CURRENT_EPOCH - $CREATED_AT_EPOCH)) -ge $STALE_TIME_INTERVAL ]]; then
     echo "Proceeding, This issue is CREATED_AT: $CREATED_AT, is greater than $AFTER_DAYS DAYS."
   else
-    echo "Ignoring, This issue is CREATED_AT: $CREATED_AT, is less than $
+    echo "Ignoring, This issue is CREATED_AT: $CREATED_AT, is less than $AFTER_DAYS DAYS."
 
   ISSUE_NUMBER=$(echo "$ISSUE_INFO" | jq --raw-output '.number')
   echo "Adding, Issue review attention LABEL: $ADD_LABEL, issue NUMBER: $ISSUE_NUMBER"
